@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz App — Select Subject</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="brand">⚡ QuickQuiz</h1>
+    <nav>
+      <a class="btn ghost" href="leaderboard.html">Leaderboard</a>
+    </nav>
+  </header>
+
+  <main class="container landing">
+    <section class="card intro">
+      <h2>Pick a subject & enter your name</h2>
+      <p>Each subject has 10 MCQs. You’ll get <strong>15 seconds</strong> per question.</p>
+
+      <form id="startForm" class="start-form">
+        <label>Username
+          <input type="text" id="username" placeholder="e.g., Ayesha" required />
+        </label>
+
+        <fieldset class="subjects">
+          <legend>Subjects</legend>
+          <label class="subject-tile">
+            <input type="radio" name="subject" value="HTML" required />
+            <span>HTML</span>
+          </label>
+          <label class="subject-tile">
+            <input type="radio" name="subject" value="CSS" required />
+            <span>CSS</span>
+          </label>
+          <label class="subject-tile">
+            <input type="radio" name="subject" value="JavaScript" required />
+            <span>JavaScript</span>
+          </label>
+        </fieldset>
+
+        <div class="actions">
+          <button class="btn primary" type="submit">Start Quiz</button>
+          <a class="btn" href="leaderboard.html">View Leaderboard</a>
+        </div>
+        <p class="deadline">Deadline: <strong>24-08-2025</strong></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">© 2025 QuickQuiz</footer>
+
+  <script>
+    document.getElementById('startForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const subject = (new FormData(e.target)).get('subject');
+      if (!username) return;
+
+      // Pass username + subject via query string
+      const params = new URLSearchParams({ username, subject });
+      window.location.href = `quiz.html?${params.toString()}`;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz — Play</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="brand">⚡ QuickQuiz</h1>
+    <nav>
+      <a class="btn ghost" href="index.html">Change Subject</a>
+      <a class="btn ghost" href="leaderboard.html">Leaderboard</a>
+    </nav>
+  </header>
+
+  <main class="container quiz-layout">
+    <aside class="panel info">
+      <h2 id="subjectTitle">Subject</h2>
+      <div class="timer">
+        <span>Time Left:</span> <strong id="time">15</strong>s
+        <div class="bar"><div id="barFill"></div></div>
+      </div>
+      <div class="user-pill">👤 <span id="userName"></span></div>
+      <div class="progress-pill">Question <span id="qNum">1</span>/10</div>
+    </aside>
+
+    <section class="card question-card fade-in" id="qCard">
+      <h3 id="qText">Question text</h3>
+      <form id="options" class="options"></form>
+
+      <div class="actions spaced">
+        <button id="prevBtn" class="btn" type="button">Previous</button>
+        <button id="nextBtn" class="btn primary" type="button">Next</button>
+        <button id="finishBtn" class="btn success" type="button">Finish</button>
+      </div>
+      <p class="hint" id="hint"></p>
+    </section>
+
+    <section class="card results-card hidden" id="resultsCard">
+      <h2>Results</h2>
+      <p><strong>Score:</strong> <span id="finalScore">0</span>/10
+        &nbsp;•&nbsp; <strong>Percentage:</strong> <span id="percentage">0%</span>
+      </p>
+      <div id="review"></div>
+      <div class="actions">
+        <button class="btn primary" id="retakeBtn" type="button">Retake</button>
+        <a class="btn" href="index.html">Choose Another Subject</a>
+        <a class="btn" href="leaderboard.html">View Leaderboard</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">© 2025 QuickQuiz</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

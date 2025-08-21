@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leaderboard — QuickQuiz</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="brand">🏆 Leaderboard</h1>
+    <nav>
+      <a class="btn ghost" href="index.html">Home</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card leaderboard-card">
+      <h2>Top 5 Scores</h2>
+      <ol id="board" class="leader-list"></ol>
+
+      <div class="actions">
+        <button class="btn danger" id="clearBoard" type="button">Clear Leaderboard</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">© 2025 QuickQuiz</footer>
+
+  <script>
+    function getBoard() {
+      const raw = localStorage.getItem('qq_leaderboard') || '[]';
+      return JSON.parse(raw);
+    }
+    function render() {
+      const list = document.getElementById('board');
+      list.innerHTML = '';
+      const top = getBoard().sort((a,b)=>b.score-a.score || a.time-b.time).slice(0,5);
+      if (top.length === 0) {
+        list.innerHTML = '<p class="muted">No scores yet — be the first!</p>';
+        return;
+      }
+      top.forEach((item, i) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span class="rank">#${i+1}</span>
+          <span class="user">${item.username}</span>
+          <span class="meta">${item.subject}</span>
+          <span class="score">${item.score}/10</span>
+          <span class="pct">(${Math.round((item.score/10)*100)}%)</span>
+          <span class="date">${new Date(item.time).toLocaleString()}</span>
+        `;
+        list.appendChild(li);
+      });
+    }
+    document.getElementById('clearBoard').addEventListener('click', ()=>{
+      if (confirm('Clear all leaderboard entries?')) {
+        localStorage.removeItem('qq_leaderboard');
+        render();
+      }
+    });
+    render();
+  </script>
+</body>
+</html>
